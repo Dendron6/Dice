@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 import pytest
@@ -13,12 +14,16 @@ sys.path.insert(0, str(src_path))
 # Configure default timeout values
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
+    # Check if running in CI environment
+    if os.environ.get('CI') or os.environ.get('JENKINS_URL'):
+        return {
+            **browser_context_args,
+            "viewport": {"width": 1920, "height": 1080},
+            "headless": True,  # Force headless in CI
+        }
     return {
         **browser_context_args,
-        "viewport": {
-            "width": 1920,
-            "height": 1080,
-        }
+        "viewport": {"width": 1920, "height": 1080},
     }
 
 @pytest.fixture(scope="session")

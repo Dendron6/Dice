@@ -1,0 +1,2 @@
+[tool.pytest.ini_options]
+addopts = "--headed"  # Change to empty string or remove for Jenkins 
