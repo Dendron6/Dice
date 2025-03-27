@@ -1,5 +1,4 @@
 from playwright.sync_api import Page
-import os
 import datetime
 
 class ProfilePage:
@@ -32,8 +31,6 @@ class ProfilePage:
         self.page.get_by_role("button", name="No").click()
         self.page.wait_for_timeout(1000)
         self.page.get_by_role("button", name="Close").nth(1).click()
-        # self.close_button.click()
-        # self.no_button.click()
         
         
         # Handle any confirmation dialogs if they appear
