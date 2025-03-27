@@ -1,8 +1,7 @@
-import os
 import sys
 from pathlib import Path
 import pytest
-from playwright.sync_api import expect, Browser, Page
+from playwright.sync_api import expect, Browser
 
 # Get the absolute path of the project root directory
 project_root = Path(__file__).parent

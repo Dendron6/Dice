@@ -24,3 +24,10 @@ Automated tests for uploading resumes to Dice.com using Playwright and Python.
 ## Running Tests
 
 Run tests with: 
+pytest tests/test_dice.py --headed -s     
+
+## before pushing to github
+
+ruff check .
+ruff check --fix .
+
