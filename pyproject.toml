@@ -1,3 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dice-tests"
+version = "0.1"
+description = "Automated tests for uploading resumes to Dice.com"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "playwright",
+    "pytest",
+    "pytest-playwright",
+    "python-dotenv",
+    "ruff",
+]
+
 [tool.pytest.ini_options]
 addopts = "--headed" 
 

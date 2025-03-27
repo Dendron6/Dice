@@ -1,14 +1,14 @@
-# from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
-# setup(
-#     name="dice-tests",
-#     version="0.1",
-#     package_dir={"": "src"},
-#     packages=find_packages(where="src"),
-#     install_requires=[
-#         "playwright",
-#         "pytest",
-#         "pytest-playwright",
-#         "python-dotenv"
-#     ],
-# ) 
+setup(
+    name="dice-tests",
+    version="0.1",
+    packages=find_packages(),
+    install_requires=[
+        "playwright",
+        "pytest",
+        "pytest-playwright",
+        "python-dotenv",
+        "ruff"
+    ],
+) 
