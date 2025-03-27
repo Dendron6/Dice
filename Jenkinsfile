@@ -10,19 +10,19 @@ pipeline {
         
         stage('Setup Python Environment') {
             steps {
-                sh '''
+                bat '''
                 python -m venv venv
-                . venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements.txt
+                call venv\\Scripts\\activate.bat
+                pip install --upgrade pip setuptools wheel
+                pip install --prefer-binary -r requirements.txt
                 '''
             }
         }
         
         stage('Install Playwright Browsers') {
             steps {
-                sh '''
-                . venv/bin/activate
+                bat '''
+                call venv\\Scripts\\activate.bat
                 playwright install
                 '''
             }
@@ -30,8 +30,8 @@ pipeline {
         
         stage('Lint') {
             steps {
-                sh '''
-                . venv/bin/activate
+                bat '''
+                call venv\\Scripts\\activate.bat
                 ruff check .
                 '''
             }
@@ -39,15 +39,16 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                withEnv(['PYTHONPATH=.']) {
+                withEnv(['PYTHONPATH=.', 'CI=true']) {
                     withCredentials([
                         string(credentialsId: 'DICE_URL', variable: 'DICE_URL'),
                         string(credentialsId: 'DICE_USERNAME', variable: 'DICE_USERNAME'),
                         string(credentialsId: 'DICE_PASSWORD', variable: 'DICE_PASSWORD')
                     ]) {
-                        sh '''
-                        . venv/bin/activate
-                        pytest tests/test_dice.py -v
+                        bat '''
+                        call venv\\Scripts\\activate.bat
+                        mkdir test-results
+                        pytest tests/test_dice.py -v --junitxml=test-results/results.xml
                         '''
                     }
                 }
