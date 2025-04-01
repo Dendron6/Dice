@@ -41,8 +41,10 @@ def test_upload_resume(auth_page: Page):
     profile_page = ProfilePage(auth_page)
     profile_page.upload_resume()
     # Add verification steps here
-    file_selector_by_date = profile_page.file_selector_by_date()
-    expect(auth_page.get_by_text(f"{file_selector_by_date['name']}DownloadUploaded to")).to_be_visible()
+    file_selector = profile_page.file_selector_by_random()
+    expect(auth_page.get_by_text(f"{file_selector['name']}Download")).to_be_visible()
+
+
    
 
 

@@ -1,5 +1,6 @@
 from playwright.sync_api import Page
 import datetime
+import random
 
 class ProfilePage:
     def __init__(self, page: Page):
@@ -9,19 +10,26 @@ class ProfilePage:
         self.no_button = page.get_by_role("button", name="No")
         self.close_button = page.get_by_role("button", name="Close")
         
-    def file_selector_by_date(self)->dict:
-        # Get today's date
-        current_date = datetime.date.today()
-        # Format the date to get only the day
-        day_only = int(current_date.strftime("%d"))
-        if day_only % 2 == 0:
+    def file_selector_by_random(self)->dict:
+        random_number = random.randint(1, 6)
+        # current_date = datetime.date.today()
+        # # Format the date to get only the day
+        # day_only = int(current_date.strftime("%d"))
+        # if day_only % 2 == 0:
+        #     return {'path':'C:/Users/denis/pythonPW/Dice/docs/Ext2025.pdf', 'name':'Ext2025.pdf'}
+        # else:
+        #     return {'path':'C:/Users/denis/pythonPW/Dice/docs/Res2025.pdf', 'name':'Res2025.pdf'}
+        
+        if random_number == 1 or random_number == 6:
             return {'path':'C:/Users/denis/pythonPW/Dice/docs/Ext2025.pdf', 'name':'Ext2025.pdf'}
+        elif random_number == 2 or random_number == 5:
+            return {'path':'C:/Users/denis/pythonPW/Dice/docs/Cuc2025.pdf', 'name':'Cuc2025.pdf'}
         else:
             return {'path':'C:/Users/denis/pythonPW/Dice/docs/Res2025.pdf', 'name':'Res2025.pdf'}
 
     def upload_resume(self) -> None:
         # Get the absolute path to the PDF file using a relative path
-        pdf_path = self.file_selector_by_date()
+        pdf_path = self.file_selector_by_random()
         print(f"PDF Path: {pdf_path['path']}")  # Print the file path for debugging
         # Wait for file chooser before clicking the button
         with self.page.expect_file_chooser() as fc_info: 
