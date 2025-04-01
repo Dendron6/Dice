@@ -23,8 +23,20 @@ Automated tests for uploading resumes to Dice.com using Playwright and Python.
 
 ## Running Tests
 
-Run tests with: 
-pytest tests/test_dice.py --headed -s     
+Run tests in headless mode (default):
+```
+pytest tests/test_dice.py
+```
+
+Run tests with browser visible:
+```
+pytest tests/test_dice.py --headed
+```
+
+Run tests with visible browser and console output:
+```
+pytest tests/test_dice.py --headed -s
+```
 
 ## before pushing to github
 
