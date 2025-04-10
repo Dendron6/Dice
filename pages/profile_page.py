@@ -11,7 +11,9 @@ class ProfilePage:
         self.close_button = page.get_by_role("button", name="Close")
         
         # Set a fixed seed for random number generation
-        random.seed(42)  # Any number will do
+        
+        day = int(datetime.date.today().strftime("%d"))
+        random.seed(day)  # Any number will do
 
         
     def file_selector_by_random(self)->dict:
